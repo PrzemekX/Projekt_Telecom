@@ -31,7 +31,7 @@ shinyServer(function(input, output) {
       ylab('Number of Subscribers') +
       xlab('Year') +
       # scale_x_continuous(labels = comma) +
-      scale_y_continuous ( labels = comma, breaks = seq(from=0,to=3000000,by=200000)) +
+      scale_y_continuous ( labels = comma, breaks = seq(from=0,to=6000000,by=200000)) +
       ggtitle("Subscribers Market Share in Switzerland for Mobile Prepaid and Postpaid market and its' competition in 2010-2015") +
       theme(plot.title=element_text(size=8, face="bold",
                                     hjust = 0.5),
@@ -41,7 +41,8 @@ shinyServer(function(input, output) {
   
   #######SECOND PLOT#######
   output$Plot2 <- renderPlot({
-    df.totalFor2015 <- matrix(apply(df[, 2:length(df)], 2, sum), 1)
+    df.totalFor2015 <- data.frame(matrix(apply(df[, 2:length(df)], 2, sum), 1))
+    #df.totalFor2015 <- matrix(apply(df[, 2:length(df)], 2, sum), 1)
     colnames(df.totalFor2015) <- names(df[,2:length(df)])
     df.totalFor2015 <- transform(df.totalFor2015, TotalSubsc = apply(df.totalFor2015, 1, sum))
     df.totalFor2015  <- as.data.frame(apply(df.totalFor2015, 2, function(x) x/df.totalFor2015$TotalSubsc))
