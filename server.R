@@ -13,21 +13,12 @@ library(scales) # to describe values on the plot 2,000,000 instead of 2000000
 dataFromExcel <- read.xlsx(file="Szwajcaria Dane.xlsx", sheetIndex=1,header=TRUE)
 
 shinyServer(function(input, output) {
-  #options(scipen=999)
-  #dataFromExcel <- read.xlsx(file="Szwajcaria Dane.xlsx", sheetIndex=1,header=TRUE)
+  options(scipen=999)
   df <- dataFromExcel
+  df$Date <- as.Date(as.character(df$Date), format="%Y-%m-%d")
   
-    # options(scipen=999)
-    # dataFromExcel <- read.xlsx(file="Szwajcaria Dane.xlsx", sheetIndex=1,header=TRUE)
-    # df <- dataFromExcel
-  output$distPlot <- renderPlot({
-    # x    <- faithful[, 2]  # Old Faithful Geyser data
-    # bins <- seq(min(x), max(x), length.out = 50)
-    # 
-    # # draw the histogram with the specified number of bins
-    # hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    
-     df$Date <- as.Date(as.character(df$Date), format="%Y-%m-%d")
+  #######FIRST PLOT#######
+  output$Plot1 <- renderPlot({
      x <- df$Date # first column with Date
      y <- df[ , 2:length(df)] # (all columns from df without the first one, the first column was x = Date)
      plotGgplot <- ggplot() +
@@ -41,20 +32,36 @@ shinyServer(function(input, output) {
       xlab('Year') +
       # scale_x_continuous(labels = comma) +
       scale_y_continuous ( labels = comma, breaks = seq(from=0,to=3000000,by=200000)) +
-      ggtitle("Subscribers in ?Country A? for ?MainPrivider? and its' competition in 2010-2015") +
+      ggtitle("Subscribers Market Share in Switzerland for Mobile Prepaid and Postpaid market and its' competition in 2010-2015") +
       theme(plot.title=element_text(size=8, face="bold",
                                     hjust = 0.5),
             axis.title=element_text(size=8))
      plotGgplot
   })
+  
+  #######SECOND PLOT#######
+  output$Plot2 <- renderPlot({
+    df.totalFor2015 <- matrix(apply(df[, 2:length(df)], 2, sum), 1)
+    colnames(df.totalFor2015) <- names(df[,2:length(df)])
+    df.totalFor2015 <- transform(df.totalFor2015, TotalSubsc = apply(df.totalFor2015, 1, sum))
+    df.totalFor2015  <- as.data.frame(apply(df.totalFor2015, 2, function(x) x/df.totalFor2015$TotalSubsc))
+    df.totalFor2015 <- apply(df.totalFor2015, 2, round, digits=3)
+    df.totalFor2015 <- as.data.frame(df.totalFor2015[-nrow(df.totalFor2015),])
+    names(df.totalFor2015) <- "TotalFor2015"
+    df.totalFor2015 <- cbind(rownames(df.totalFor2015), df.totalFor2015)
+    colnames(df.totalFor2015)[1] <- "ServiceProviders"
+    x.totalFor2015 <- df.totalFor2015[,1]
+    y.totalFor2015 <- df.totalFor2015[,2]
+    allSubsc2015MarketSharePie <- ggplot(df.totalFor2015,
+                                         aes(x = "", y=TotalFor2015, fill = ServiceProviders)) +
+      geom_bar(width=1, stat="identity") +
+      coord_polar(theta = "y") +
+      scale_x_discrete("") +
+      ggtitle("Subscribers Market Share in Switzerland for Mobile Prepaid and Postpaid market and its' competition in 2010-2015") +
+      theme(plot.title=element_text(size=8, face="bold",
+                                    hjust = 0.5),
+            axis.title=element_text(size=8))
+    allSubsc2015MarketSharePie
   })
-
-  #output$distPlot <- renderPlot({
-
-    # generate bins based on input$bins from ui.R
-    #x    <- faithful[, 2]
-    #bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-    # draw the histogram with the specified number of bins
-    #hist(x, breaks = bins, col = 'darkgray', border = 'white')
+  })
 
