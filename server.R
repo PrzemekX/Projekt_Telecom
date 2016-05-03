@@ -69,7 +69,7 @@ shinyServer(function(input, output) {
       xlab('Year') +
       # scale_x_continuous(labels = comma, breaks = seq(from=2003,to=2015,by=1)) +
       scale_y_continuous ( labels = comma, breaks = seq(from=0,to=6000000,by=200000)) +
-      ggtitle("Subscribers Market Share in Switzerland for Mobile Prepaid and Postpaid market and its' competition in 2010-2015") +
+      ggtitle("Subscribers Market Share in Switzerland for Mobile Prepaid and Postpaid market and its' competition in 2003-2015") +
       theme(plot.title=element_text(size=8, face="bold", hjust = 0.5), axis.title=element_text(size=8))
      plotGgplot
   })
@@ -93,7 +93,7 @@ shinyServer(function(input, output) {
       geom_bar(width=1, stat="identity") +
       coord_polar(theta = "y") +
       scale_x_discrete("") +
-      ggtitle("Subscribers Market Share in Switzerland for Mobile Prepaid and Postpaid market and its' competition in 2010-2015") +
+      ggtitle("Subscribers Market Share in Switzerland for Mobile Prepaid and Postpaid market and its' competition in 2003-2015") +
       theme(plot.title=element_text(size=8, face="bold",
                                     hjust = 0.5),
             axis.title=element_text(size=8))
