@@ -7,7 +7,7 @@
 
 library(shiny)
 
-shinyUI(fluidPage( theme = "styles.css",
+shinyUI(fluidPage( theme = "bootstrap.css",
 
   # Application title
   titlePanel(h2("Subscribers Market Share in Switzerland for Mobile Prepaid and Postpaid market and its' competition in 2003-2015")),
@@ -23,6 +23,7 @@ shinyUI(fluidPage( theme = "styles.css",
                          choices = list("Swisscom prepaid" = 1, "Swisscom postpaid" = 2, "Sunrise prepaid" = 3, "Sunrise postpaid" = 4, "Orange prepaid" = 5, "Orange postpaid" = 6),
                          selected = c(1,2,3,4,5,6))
     ),
+    # navbarPage()
     #####WIDGET - Checkbox Group - END#####
     
     # Show a plot of the generated distribution
