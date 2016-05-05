@@ -76,28 +76,65 @@ shinyServer(function(input, output) {
   
   #######SECOND PLOT#######
   output$Plot2 <- renderPlot({
-    df.totalFor2015 <- data.frame(matrix(apply(df[, 2:length(df)], 2, sum), 1))
+    
+    #####WIDGET - OPTION - OPEN#####
+    df3 <- df
+    InputMod2 <- input$Plot_2_1
+    for(i in 1:15) {
+      InputMod2[length(InputMod2)+1] <- 0
+    }
+
+    if(InputMod2[1] != 1) {
+      df3$Swisscom_prepaid <- NULL
+    }
+    if(!(!(InputMod2[1] != 2) || !(InputMod2[2] != 2))) {
+      df3$Swisscom_postpaid <- NULL
+    }
+    if(!((!(InputMod2[1] != 3) || !(InputMod2[2] != 3)) || !(InputMod2[3] != 3))) {
+      df3$Sunrise_prepaid <- NULL
+    }
+    if(!( ((!(InputMod2[1] != 4) || !(InputMod2[2] != 4)) || !(InputMod2[3] != 4)) || !(InputMod2[4] != 4))) {
+      df3$Sunrise_postpaid <- NULL
+    }
+    if(!( (((!(InputMod2[1] != 5) || !(InputMod2[2] != 5)) || !(InputMod2[3] != 5)) || !(InputMod2[4] != 5)) || !(InputMod2[5] != 5))) {
+      df3$Orange_prepaid <- NULL
+    }
+    if(!( ((((!(InputMod2[1] != 6) || !(InputMod2[2] != 6)) || !(InputMod2[3] != 6)) || !(InputMod2[4] != 6)) || !(InputMod2[5] != 6)) || !(InputMod2[6] != 6))) {
+      df3$Orange_postpaid <- NULL
+    }
+    ###7 Population
+    if(!( (((((!(InputMod2[1] != 7) || !(InputMod2[2] != 7)) || !(InputMod2[3] != 7)) || !(InputMod2[4] != 7)) || !(InputMod2[5] != 7)) || !(InputMod2[6] != 7)) || !(InputMod2[7] != 7))) {
+      df3$Population <- NULL
+    }
+    ###8 Female population
+    if(!( ((((((!(InputMod2[1] != 8) || !(InputMod2[2] != 8)) || !(InputMod2[3] != 8)) || !(InputMod2[4] != 8)) || !(InputMod2[5] != 8)) || !(InputMod2[6] != 8)) || !(InputMod2[7] != 8)) || !(InputMod2[8] != 8))) {
+      df3$F.pop <- NULL
+    }
+    ###9 Male population
+    if(!( (((((((!(InputMod2[1] != 9) || !(InputMod2[2] != 9)) || !(InputMod2[3] != 9)) || !(InputMod2[4] != 9)) || !(InputMod2[5] != 9)) || !(InputMod2[6] != 9)) || !(InputMod2[7] != 9)) || !(InputMod2[8] != 9)) || !(InputMod2[9] != 9))) {
+      df3$M.pop <- NULL
+    }
+    #####WIDGET - OPTION - END#####
+    
+    df3.totalFor2015 <- data.frame(matrix(apply(df3[, 2:length(df3)], 2, sum), 1))
     #df.totalFor2015 <- matrix(apply(df[, 2:length(df)], 2, sum), 1)
-    colnames(df.totalFor2015) <- names(df[,2:length(df)])
-    df.totalFor2015 <- transform(df.totalFor2015, TotalSubsc = apply(df.totalFor2015, 1, sum))
-    df.totalFor2015  <- as.data.frame(apply(df.totalFor2015, 2, function(x) x/df.totalFor2015$TotalSubsc))
-    df.totalFor2015 <- apply(df.totalFor2015, 2, round, digits=3)
-    df.totalFor2015 <- as.data.frame(df.totalFor2015[-nrow(df.totalFor2015),])
-    names(df.totalFor2015) <- "TotalFor2015"
-    df.totalFor2015 <- cbind(rownames(df.totalFor2015), df.totalFor2015)
-    colnames(df.totalFor2015)[1] <- "ServiceProviders"
-    x.totalFor2015 <- df.totalFor2015[,1]
-    y.totalFor2015 <- df.totalFor2015[,2]
-    allSubsc2015MarketSharePie <- ggplot(df.totalFor2015,
-                                         aes(x = "", y=TotalFor2015, fill = ServiceProviders)) +
+    colnames(df3.totalFor2015) <- names(df3[,2:length(df3)])
+    df3.totalFor2015 <- transform(df3.totalFor2015, TotalSubsc = apply(df3.totalFor2015, 1, sum))
+    df3.totalFor2015  <- as.data.frame(apply(df3.totalFor2015, 2, function(x) x/df3.totalFor2015$TotalSubsc))
+    df3.totalFor2015 <- apply(df3.totalFor2015, 2, round, digits=3)
+    df3.totalFor2015 <- as.data.frame(df3.totalFor2015[-nrow(df3.totalFor2015),])
+    names(df3.totalFor2015) <- "TotalFor2015"
+    df3.totalFor2015 <- cbind(rownames(df3.totalFor2015), df3.totalFor2015)
+    colnames(df3.totalFor2015)[1] <- "ServiceProviders"
+    x.totalFor2015 <- df3.totalFor2015[,1]
+    y.totalFor2015 <- df3.totalFor2015[,2]
+    allSubsc2015MarketSharePie <- ggplot(df3.totalFor2015, aes(x = "", y=TotalFor2015, fill = ServiceProviders)) +
       geom_bar(width=1, stat="identity") +
       coord_polar(theta = "y") +
       scale_x_discrete("") +
       ggtitle("Subscribers Market Share in Switzerland for Mobile Prepaid and Postpaid market and its' competition in 2003-2015") +
-      theme(plot.title=element_text(size=8, face="bold",
-                                    hjust = 0.5),
-            axis.title=element_text(size=8))
+      theme(plot.title=element_text(size=8, face="bold", hjust = 0.5), axis.title=element_text(size=8))
     allSubsc2015MarketSharePie
   })
-  })
+})
 

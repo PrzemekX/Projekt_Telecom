@@ -43,8 +43,15 @@ shinyUI(fluidPage( theme = "bootstrap.css",
     ),
   #####WIDGET - SLIDER RANGE - END#####
   
-  # mainPanel(
-    plotOutput("Plot2")
-  # )
+  sidebarLayout( position = "right",
+    sidebarPanel( width = 4,
+                  checkboxGroupInput("Plot_2_1", label = h3("Plot 2 options - Mobile market"),
+                  choices = list("Swisscom prepaid" = 1, "Swisscom postpaid" = 2, "Sunrise prepaid" = 3, "Sunrise postpaid" = 4, "Orange prepaid" = 5, "Orange postpaid" = 6, "Population" = 7, "Female population" = 8, "Male population" = 9),
+                  selected = c(1,2,3,4,5,6,7,8,9))
+                 ),
+    mainPanel(
+      plotOutput("Plot2")
+    )
+  )
   
 ))
