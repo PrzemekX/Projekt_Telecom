@@ -19,9 +19,9 @@ dataFromExcelPr <- read.xlsx(file="Szwajcaria Dane Procent.xlsx", sheetIndex=1,h
 shinyServer(function(input, output) {
   options(scipen=999)
   df <- dataFromExcel
-  
-  #######FIRST PLOT#######
   df$Date <- as.Date(as.character(df$Date), format="%Y-%m-%d")
+  
+  #################PLOT1##################
   output$Plot1 <- renderPlot({
     
     #####WIDGET - SLIDER RANGE - OPEN#####
@@ -75,7 +75,7 @@ shinyServer(function(input, output) {
      plotGgplot
   })
   
-  #######SECOND PLOT#######
+  #############PLOT2#################
   output$Plot2 <- renderPlot({
     
     #####WIDGET - OPTION - OPEN#####
@@ -119,52 +119,47 @@ shinyServer(function(input, output) {
       df3$Total <- NULL
     }
     #####WIDGET - OPTION - END#####
-    InputMod2 <- input$Plot_2_2
-    for(i in 1:13) {
-      InputMod2[length(InputMod2)+1] <- 0
-    }
-    k <- 0
+    InputMod2 <- input$Plot2_2
     
     if(InputMod2[1] == 1) {
       k <- 1
     }
-    if(InputMod2[2] == 2) {
+    if(InputMod2[1] == 2) {
       k <- 2
     }
-    if(InputMod2[3] == 3) {
+    if(InputMod2[1] == 3) {
       k <- 3
     }
-    if(InputMod2[4] == 4) {
+    if(InputMod2[1] == 4) {
       k <- 4
     }
-    if(InputMod2[5] == 5) {
+    if(InputMod2[1] == 5) {
       k <- 5
     }
-    if(InputMod2[6] == 6) {
+    if(InputMod2[1] == 6) {
       k <- 6
     }
-    if(InputMod2[7] == 7) {
+    if(InputMod2[1] == 7) {
       k <- 7
     }
-    if(InputMod2[8] == 8) {
+    if(InputMod2[1] == 8) {
       k <- 8
     }
-    if(InputMod2[9] == 9) {
+    if(InputMod2[1] == 9) {
       k <- 9
     }
-    if(InputMod2[10] == 10) {
+    if(InputMod2[1] == 10) {
       k <- 10
     }
-    if(InputMod2[11] == 11) {
+    if(InputMod2[1] == 11) {
       k <- 11
     }
-    if(InputMod2[12] == 12) {
+    if(InputMod2[1] == 12) {
       k <- 12
     }
-    if(InputMod2[13] == 13) {
+    if(InputMod2[1] == 13) {
       k <- 13
     }
-    
     df3.totalFor2015 <- data.frame(matrix(apply(df3[k, 2:length(df3)], 2, sum), 1))
     #df.totalFor2015 <- matrix(apply(df[, 2:length(df)], 2, sum), 1)
     colnames(df3.totalFor2015) <- names(df3[k,2:length(df3)])
@@ -186,6 +181,7 @@ shinyServer(function(input, output) {
     allSubsc2015MarketSharePie
   })
   
+  ###############PLOT3########################
   output$Plot3 <- renderPlot({
     df <- dataFromExcelPr
     df$Date <- as.Date(as.character(df$Date), format="%Y-%m-%d") 
@@ -205,6 +201,8 @@ shinyServer(function(input, output) {
         theme(plot.title=element_text(size=8, face="bold", hjust = 0.5), axis.title=element_text(size=8))
       plotGgplot2
   })
+  
+  ##################PLOT4############################
   output$Plot4 <- renderPlot({
     df$Date <- as.Date(as.character(df$Date), format="%Y-%m-%d")
     
