@@ -16,9 +16,16 @@ install.packages("xlsx")
 
 install.packages("ggplot2")
 
+install.packages("scales")
 
-Skrypty Checkbox Group oraz SLIDER RANGE:
+Skrypty na użyte widgety:
 
 https://gallery.shinyapps.io/077-widget-slider/
+
+https://gallery.shinyapps.io/069-widget-check-group/
+
+https://gallery.shinyapps.io/075-widget-radio/
+
+Oraz inne:
 
 http://shiny.rstudio.com/gallery/widget-gallery.html
