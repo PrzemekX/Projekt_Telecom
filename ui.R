@@ -46,12 +46,29 @@ shinyUI(fluidPage( theme = "bootstrap.css",
   sidebarLayout( position = "right",
     sidebarPanel( width = 4,
                   checkboxGroupInput("Plot_2_1", label = h3("Plot 2 options - Mobile market"),
-                  choices = list("Swisscom prepaid" = 1, "Swisscom postpaid" = 2, "Sunrise prepaid" = 3, "Sunrise postpaid" = 4, "Orange prepaid" = 5, "Orange postpaid" = 6, "Population" = 7, "Female population" = 8, "Male population" = 9),
-                  selected = c(1,2,3,4,5,6,7,8,9))
+                  choices = list("Swisscom prepaid" = 1, "Swisscom postpaid" = 2, "Sunrise prepaid" = 3, "Sunrise postpaid" = 4, "Orange prepaid" = 5, "Orange postpaid" = 6, "Population" = 7, "Female population" = 8, "Male population" = 9, "Total" = 10),
+                  selected = c(1,2,3,4,5,6,7,8,9,10))
                  ),
+    # sidebarPanel( width = 4,
+    #               checkboxGroupInput("Plot_2_2", label = h3("Plot 2 options - Year"),
+    #                                  choices = list("2003" = 1, "2004" = 2, "2005" = 3, "2006" = 4, "2007" = 5, "2008" = 6, "2009" = 7, "2010" = 8, "2011" = 9, "2012" = 10, "2013" = 11, "2014" = 12, "2015" = 13),
+    #                                  selected = c(1,2,3,4,5,6,7,8,9,10,11,12,13))
+    #                                  ),
     mainPanel(
       plotOutput("Plot2")
-    )
-  )
+    ),
+  ),
   
+  sidebarLayout( position = "right",
+                 sidebarPanel( width = 4,
+                               checkboxGroupInput("Plot_2_2", label = h3("Plot 2 options - Year"),
+                                                  choices = list("2003" = 1, "2004" = 2, "2005" = 3, "2006" = 4, "2007" = 5, "2008" = 6, "2009" = 7, "2010" = 8, "2011" = 9, "2012" = 10, "2013" = 11, "2014" = 12, "2015" = 13),
+                                                  selected = c(1,2,3,4,5,6,7,8,9,10,11,12,13)
+                                                  )
+                 ),
+                 mainPanel(
+                   plotOutput("Plot3")
+                 ),
+  ),
+                   plotOutput("Plot4")
 ))
