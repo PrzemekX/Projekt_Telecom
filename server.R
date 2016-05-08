@@ -103,15 +103,12 @@ shinyServer(function(input, output) {
     if(!( ((((!(InputMod2[1] != 6) || !(InputMod2[2] != 6)) || !(InputMod2[3] != 6)) || !(InputMod2[4] != 6)) || !(InputMod2[5] != 6)) || !(InputMod2[6] != 6))) {
       df3$Orange_postpaid <- NULL
     }
-    ###7 Population
     if(!( (((((!(InputMod2[1] != 7) || !(InputMod2[2] != 7)) || !(InputMod2[3] != 7)) || !(InputMod2[4] != 7)) || !(InputMod2[5] != 7)) || !(InputMod2[6] != 7)) || !(InputMod2[7] != 7))) {
       df3$Population <- NULL
     }
-    ###8 Female population
     if(!( ((((((!(InputMod2[1] != 8) || !(InputMod2[2] != 8)) || !(InputMod2[3] != 8)) || !(InputMod2[4] != 8)) || !(InputMod2[5] != 8)) || !(InputMod2[6] != 8)) || !(InputMod2[7] != 8)) || !(InputMod2[8] != 8))) {
       df3$F.pop <- NULL
     }
-    ###9 Male population
     if(!( (((((((!(InputMod2[1] != 9) || !(InputMod2[2] != 9)) || !(InputMod2[3] != 9)) || !(InputMod2[4] != 9)) || !(InputMod2[5] != 9)) || !(InputMod2[6] != 9)) || !(InputMod2[7] != 9)) || !(InputMod2[8] != 9)) || !(InputMod2[9] != 9))) {
       df3$M.pop <- NULL
     }
@@ -215,7 +212,7 @@ shinyServer(function(input, output) {
     x.stand <- df.stand[,1]
     y.stand <- df.stand[,2:length(df.stand)]
     df$Total <- NULL
-    df$Population<- NULL
+    df$Population <- NULL
     df$F.pop<- NULL
     df$M.pop<- NULL
     

@@ -14,6 +14,8 @@ shinyUI(fluidPage( theme = "bootstrap.css",
   # Add CSS
   includeCSS("styles.css"),
   
+  hr(),
+  
   sidebarLayout( position = "right",
     
     #####WIDGET - Checkbox Group - OPEN#####
@@ -43,6 +45,8 @@ shinyUI(fluidPage( theme = "bootstrap.css",
     ),
   #####WIDGET - SLIDER RANGE - END#####
   
+  hr(),
+  
   sidebarLayout( position = "right",
     sidebarPanel( width = 4,
                   checkboxGroupInput("Plot_2_1", label = h3("Plot 2 options - Mobile market"),
@@ -52,31 +56,18 @@ shinyUI(fluidPage( theme = "bootstrap.css",
     
     mainPanel(
       plotOutput("Plot2")
-    ),
+    )
   ),
   
-  sidebarLayout( position = "right",
-                 # sidebarPanel( width = 4,
-                 #               checkboxGroupInput("Plot_2_2", label = h3("Plot 2 options - Year"),
-                 #                                  choices = list("2003" = 1, "2004" = 2, "2005" = 3, "2006" = 4, "2007" = 5, "2008" = 6, "2009" = 7, "2010" = 8, "2011" = 9, "2012" = 10, "2013" = 11, "2014" = 12, "2015" = 13),
-                 #                                  selected = c(1,2,3,4,5,6,7,8,9,10,11,12,13)
-                 #                                  )
-                 # ),
-                 # fluidRow(column(3,
-                 radioButtons("Plot2_2", label = h3("Plot 2 options - Year"),
-                              choices = list("2003" = 1, "2004" = 2, "2005" = 3, "2006" = 4, "2007" = 5, "2008" = 6, "2009" = 7, "2010" = 8, "2011" = 9, "2012" = 10, "2013" = 11, "2014" = 12, "2015" = 13),
-                              selected = 1,
-                              inline = TRUE),
-                 # )),
-                 # hr(),
-                 fluidRow(column(3, 
-                                 verbatimTextOutput("value")
-                                 )),
-                 
-                 # mainPanel(
-                 #   plotOutput(NULL)
-                 # ),
-  ),
-    plotOutput("Plot3"),
-    plotOutput("Plot4")
+  radioButtons("Plot2_2", label = h3("Plot 2 options - Year"),
+               choices = list("2003" = 1, "2004" = 2, "2005" = 3, "2006" = 4, "2007" = 5, "2008" = 6, "2009" = 7, "2010" = 8, "2011" = 9, "2012" = 10, "2013" = 11, "2014" = 12, "2015" = 13),
+               selected = 1,
+               inline = TRUE),
+  
+  hr(),
+  
+  plotOutput("Plot3"),
+  hr(),
+  plotOutput("Plot4"),
+  hr()
 ))
